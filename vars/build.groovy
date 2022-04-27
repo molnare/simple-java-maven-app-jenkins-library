@@ -10,10 +10,23 @@ def call(Map buildStageSwitches = [:]) {
         }
 
         stages {
+            
+            stage('Clean'){
+                steps {
+                    sh "mvn clean "
+                }
+            }
+            
             stage('Build') {
+                steps {
+                    sh "mvn compile"
+                }
+            }
+            
+            stage('Package') {
 
                 steps {
-                    sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                    sh "mvn -Dmaven.test.failure.ignore=true package"
                 }
 
                 post {
